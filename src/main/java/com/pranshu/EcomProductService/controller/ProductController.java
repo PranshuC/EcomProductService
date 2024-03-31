@@ -1,14 +1,14 @@
 package com.pranshu.EcomProductService.controller;
 
 import com.pranshu.EcomProductService.dto.ProductListResponseDTO;
+import com.pranshu.EcomProductService.dto.ProductRequestDTO;
 import com.pranshu.EcomProductService.dto.ProductResponseDTO;
 import com.pranshu.EcomProductService.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -17,9 +17,19 @@ import java.util.List;
 @RestController
 public class ProductController {
 
+    private final ProductService productService; // immutable - Constructor injection
+
+    // @Autowired is optional from Spring 4.3 onwards
+    public ProductController(
+            @Qualifier("fakeStoreProductService") ProductService productService) {
+        this.productService = productService;
+    }
+
+/* Field injection
     @Autowired
     @Qualifier("fakeStoreProductService")
     private ProductService productService;
+ */
 
     @GetMapping("/products")
     public ResponseEntity getAllProducts() {
@@ -45,14 +55,27 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/products/1")
-    public ResponseEntity getProductFromId() {
-        ProductResponseDTO response = productService.getProductById(1);
+    @GetMapping("/products/{id}")
+    public ResponseEntity getProductFromId(@PathVariable("id") int id) {
+        ProductResponseDTO response = productService.getProductById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/products")
+    public ResponseEntity createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
+        ProductResponseDTO responseDTO = productService.createProduct(productRequestDTO);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity deleteProduct(@PathVariable("id") int id) {
+        boolean response = productService.deleteProduct(id);
         return ResponseEntity.ok(response);
     }
 }
+
 /*
 Domain Name -> IP+Port -> OS in server -> port is binded to process -> Tomat is binded to 8080
-HTTP -> Tomcat -> DispatcherServlet[loads all URLs and handler mappings]
--> Servlet Container -> Servlets
+HTTP -> Tomcat -> DispatcherServlet[loads all URLs and handler mappings] -> Servlet Container -> Servlets
+DispatcherServlet -> HandlerMapping -> Controller -> Service -> Repository -> DB
  */

@@ -1,6 +1,7 @@
 package com.pranshu.EcomProductService.service;
 
 import com.pranshu.EcomProductService.dto.ProductListResponseDTO;
+import com.pranshu.EcomProductService.dto.ProductRequestDTO;
 import com.pranshu.EcomProductService.dto.ProductResponseDTO;
 import com.pranshu.EcomProductService.model.Product;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(Product product) {
+    public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {
         return null;
     }
 
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(int id) {
-
+    public boolean deleteProduct(int id) {
+        return false;
     }
 }
