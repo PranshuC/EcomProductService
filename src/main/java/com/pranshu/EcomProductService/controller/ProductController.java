@@ -3,16 +3,11 @@ package com.pranshu.EcomProductService.controller;
 import com.pranshu.EcomProductService.dto.ProductListResponseDTO;
 import com.pranshu.EcomProductService.dto.ProductRequestDTO;
 import com.pranshu.EcomProductService.dto.ProductResponseDTO;
+import com.pranshu.EcomProductService.exception.ProductNotFoundException;
 import com.pranshu.EcomProductService.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class ProductController {
@@ -56,7 +51,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity getProductFromId(@PathVariable("id") int id) {
+    public ResponseEntity getProductFromId(@PathVariable("id") int id) throws ProductNotFoundException {
         ProductResponseDTO response = productService.getProductById(id);
         return ResponseEntity.ok(response);
     }

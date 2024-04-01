@@ -15,3 +15,43 @@
 3. Updated the service layer for new APIs
 4. Wrote a small intro to Controller Advice
 
+### Building REST APIs - 4 [26-10-23]
+Controller -> RequestDTO, ResponseDTO <br>
+CreateProductRequestDTO -> has all attributes except "id" <br>
+ProductResponseDTO -> has all the attributes <br>
+
+Client -> RequestDTO, ResponseDTO <br>
+FakeStoreCreateProductRequestDTO -> has all attributes except "id" <br>
+FakeStoreProductResponseDTO -> has all the attributes <br>
+(There can be scenarios where the attributes might be different. 
+So, ideally 4 DTOs required)
+
+Ex : YouTube <br>
+User uploads a video -> VideoIngestionService -> VideoStore <br>
+VideoUploadRequestDTO : controller -> VideoIngestionService
+- name
+- description
+- thumbnail
+- bookmarks
+- videoFile
+- format
+- uploadedAt
+- uploadedBy
+
+VideoStoreCreateVideoRequestDTO : VideoStoreClient-> VideoStore
+- name
+- description
+- thumbnail
+- bookmarks
+- videoFile
+- format
+- uploadedAt
+- uploadedBy
+- tags
+- topics
+- constant for algo
+- List<Resolutions>
+
+Development cycle -> local, dev[dev instances], 
+UAT/QA/staging[prod replica], prod <br>
+UAT -> User Acceptance Testing <br>
