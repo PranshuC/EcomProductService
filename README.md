@@ -6,7 +6,7 @@
 3. Created the controller
 4. Created the service layer
 5. Implemented RestTemplate
-6. Invoked call to 3rd party [ FakeStoreAPI ] to get data
+6. Invoked call to 3rd party (FakeStoreAPI) to get data
 7. Returned response from controller
 
 ### Building REST APIs - 3 [23-10-23] -> CRUD APIs, Exception Handling
@@ -52,6 +52,26 @@ VideoStoreCreateVideoRequestDTO : VideoStoreClient-> VideoStore
 - constant for algo
 - List<Resolutions>
 
-Development cycle -> local, dev[dev instances], 
-UAT/QA/staging[prod replica], prod <br>
-UAT -> User Acceptance Testing <br>
+Development cycle -> local, dev (dev instances), 
+UAT/QA/staging (prod replica), prod <br>
+UAT -> User Acceptance Testing
+
+### Database:Queries,Inheritance,Relations - 4 [31-10-23]
+**MappedSuperClass** -> No table for parent class, but individual for each child class.
+Child class gets the attributes from parent, and they become columns in child class table.
+
+Configuration Details :<br>
+ddl.auto -> create, update, verify <br>
+- Create : Everytime you start the application, 
+it will drop all the tables and recreate them. High chances of losing data.
+- Update : Everytime you start the application, 
+only the update changes are implemented.
+- Verify : It does not create/update anything, 
+it just verifies if the DB has all the tables/columns/mappings as mentioned in the entities. 
+-> Generally used in companies, for production
+
+Local development -> create or update<br>
+Production -> verify ( generally tables via separate scripts like FlyWay, Liquibase )
+
+CrudRepository is subset of JpaRepository <br>
+JpaRepository -> CRUD + Paging + Sorting
