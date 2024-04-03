@@ -16,7 +16,8 @@ public class ProductController {
 
     // @Autowired is optional from Spring 4.3 onwards
     public ProductController(
-            @Qualifier("fakeStoreProductService") ProductService productService) {
+            //@Qualifier("fakeStoreProductService") ProductService productService) {
+            @Qualifier("productService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -53,6 +54,12 @@ public class ProductController {
     @GetMapping("/products/{id}")
     public ResponseEntity getProductFromId(@PathVariable("id") int id) throws ProductNotFoundException {
         ProductResponseDTO response = productService.getProductById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/products/title/{title}")
+    public ResponseEntity getProductFromTitle(@PathVariable("title") String title) {
+        ProductResponseDTO response = productService.findProductByTitle(title);
         return ResponseEntity.ok(response);
     }
 

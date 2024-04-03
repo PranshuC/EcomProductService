@@ -4,15 +4,26 @@ import com.pranshu.EcomProductService.dto.ProductListResponseDTO;
 import com.pranshu.EcomProductService.dto.ProductRequestDTO;
 import com.pranshu.EcomProductService.dto.ProductResponseDTO;
 import com.pranshu.EcomProductService.model.Product;
+import com.pranshu.EcomProductService.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.pranshu.EcomProductService.mapper.ProductMapper.convertProductListToProductListResponseDTO;
+import static com.pranshu.EcomProductService.mapper.ProductMapper.convertProductToProductResponseDTO;
+
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
+
+    private ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
     @Override
     public ProductListResponseDTO getAllProducts() {
-        return null;
+        List<Product> products = productRepository.findAll();
+        return convertProductListToProductListResponseDTO(products);
     }
 
     @Override
@@ -33,5 +44,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean deleteProduct(int id) {
         return false;
+    }
+
+    @Override
+    public ProductResponseDTO findProductByTitle(String title) {
+        Product product = productRepository.findByTitle(title);
+        ProductResponseDTO productResponseDTO = convertProductToProductResponseDTO(product);
+        return productResponseDTO;
     }
 }

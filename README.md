@@ -9,11 +9,13 @@
 6. Invoked call to 3rd party (FakeStoreAPI) to get data
 7. Returned response from controller
 
+
 ### Building REST APIs - 3 [23-10-23] -> CRUD APIs, Exception Handling
 1. Construction Injection
 2. CRUD APIs - getProductById, getAllProducts, createProduct
 3. Updated the service layer for new APIs
 4. Wrote a small intro to Controller Advice
+
 
 ### Building REST APIs - 4 [26-10-23]
 Controller -> RequestDTO, ResponseDTO <br>
@@ -56,6 +58,7 @@ Development cycle -> local, dev (dev instances),
 UAT/QA/staging (prod replica), prod <br>
 UAT -> User Acceptance Testing
 
+
 ### Database:Queries,Inheritance,Relations - 4 [31-10-23]
 **MappedSuperClass** -> No table for parent class, but individual for each child class.
 Child class gets the attributes from parent, and they become columns in child class table.
@@ -75,3 +78,34 @@ Production -> verify ( generally tables via separate scripts like FlyWay, Liquib
 
 CrudRepository is subset of JpaRepository <br>
 JpaRepository -> CRUD + Paging + Sorting
+
+
+### Database:JPA Mapping [07-11-23]
+DB Fundamental : **OneToMany** -> Primary Key(PK) of 1 side, goes as Foreign Key(FK) into M side.
+
+**Unidirectional** options :
+1. *@ManyToOne* -> By default, PK of 1[Category] side goes as FK into M[Product] side.<br>
+2. *@OneToMany* -> By default, creates a mapping table.<br>
+With *@JoinColumn* -> Specify PK of 1 side as FK into M side.
+Convention for join column "name" -> tableName_idFieldName
+
+**Bidirectional** options :
+1. No mapping table, PK of 1 side goes as FK of M side -> @JoinColumn(name = "tableName_idField")
+2. Set the owning side of the relationship -> mappedBy<br>
+*mappedBy* -> owner class, with the opposite side's owner attribute.<br>
+Ex : Product and Category, *category* is owner. <br>
+Category attribute at Product side = "category" <br>
+Category side:
+```javascript
+@OneToMany(mappedBy = "category")
+private List<Product> product;
+```
+
+**ManyToMany** <br>
+*Unidirectional* -> nothing required, single mapping table is generated <br>
+*Bidirectional* -> mappedBy is required to generate single mapping table else, will generate 2 mapping tables
+
+1. Create tables
+2. Insertion of data -> save() -> upsert (insert and update)
+3. Query
+

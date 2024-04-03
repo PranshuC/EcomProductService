@@ -16,10 +16,10 @@ public class Product extends BaseModel {
     private String title;
     private String description;
     private String image;
-    @ManyToOne
-    private Category category;
     @OneToOne
     private Price price;
+    @ManyToOne
+    private Category category;
 }
 /*
     Product - Category : M : 1
@@ -28,19 +28,10 @@ public class Product extends BaseModel {
     -----------
     M         1
 
-    Category
-        List<Product>
-
-    Product
-        Category
-
-    1 > M
-
     Product - Order is ManyToMany Uni-Directional mapping
     So, only Order will have List of products
     With "ManyToMany" annotation here (Bi-Directional), Hibernate will create another table
     "ORDER_PRODUCTS" with "ECOM_ORDER_PRODUCTS" with same columns "order_id" and "product_id"
 
     At any single point of time, Product will have only one Price
-
  */

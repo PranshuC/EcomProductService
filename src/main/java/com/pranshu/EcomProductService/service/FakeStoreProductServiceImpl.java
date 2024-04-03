@@ -66,4 +66,9 @@ public class FakeStoreProductServiceImpl implements ProductService {
         fakeStoreAPIClient.deleteProduct(id);
         return true;
     }
+
+    @Override
+    public ProductResponseDTO findProductByTitle(String title) {
+        return null;
+    }
 }

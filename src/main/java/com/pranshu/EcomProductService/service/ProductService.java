@@ -14,4 +14,5 @@ public interface ProductService {
     public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO);
     public Product updateProduct(int id, Product updatedProduct);
     public boolean deleteProduct(int id);
+    public ProductResponseDTO findProductByTitle(String title);
 }
