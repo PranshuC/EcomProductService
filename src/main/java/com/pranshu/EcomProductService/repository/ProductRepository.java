@@ -2,6 +2,7 @@ package com.pranshu.EcomProductService.repository;
 
 import com.pranshu.EcomProductService.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -10,22 +11,30 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     Product findByTitle(String title);
 
-    // Select * from product where title = ? and description = ?
+    // SELECT * FROM product WHERE title = ? AND description = ?
     Product findByTitleAndDescription(String title, String description);
 
-    // Select * from product where title = ? or description = ?
+    // SELECT * FROM product WHERE title = ? OR description = ?
     Product findByTitleOrDescription(String title, String description);
 
+    @Query(value = CustomQueries.FIND_PRODUCT_BY_TITLE, nativeQuery = true)
+    Product findProductByTitleLike(String title);
+
     // <= price
-    Product findByPriceLessThanEqual(double price);
+    Product findByPrice_amountLessThanEqual(double amount);
 
     // > price
-    Product findByPriceGreaterThan(double price);
+    //Product findByPriceGreaterThan(double price); // Price object error
 
-    Product findByPriceBetweenStartPriceAndEndPrice(double startPrice, double endPrice);
+    //Product findByPriceBetweenStartPriceAndEndPrice(double startPrice, double endPrice);
 }
 
-// JPA is powerful enough to generate queries based on method names
-// JPA maps attributes of the entity to the method names
-// Hibernate will generate the query based on attributes
-// Custom SQL queries can be written using @Query annotation
+/**
+ * JPA is powerful enough to generate queries based on method names
+ *  JPA maps attributes of the entity to the method names
+ *  Hibernate will generate the query based on attributes
+ *  findByPrice_amount -> price.amount will be used to generate the query
+ *
+ *  Custom SQL queries can be written using @Query annotation
+ */
+

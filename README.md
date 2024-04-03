@@ -10,11 +10,11 @@
 7. Returned response from controller
 
 
-### Building REST APIs - 3 [23-10-23] -> CRUD APIs, Exception Handling
+### Building REST APIs - 3 [23-10-23]
 1. Construction Injection
 2. CRUD APIs - getProductById, getAllProducts, createProduct
 3. Updated the service layer for new APIs
-4. Wrote a small intro to Controller Advice
+4. Wrote a small intro to Controller Advice (Exception Handling)
 
 
 ### Building REST APIs - 4 [26-10-23]
@@ -96,7 +96,7 @@ Convention for join column "name" -> tableName_idFieldName
 Ex : Product and Category, *category* is owner. <br>
 Category attribute at Product side = "category" <br>
 Category side:
-```javascript
+```java
 @OneToMany(mappedBy = "category")
 private List<Product> product;
 ```
