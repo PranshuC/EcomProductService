@@ -3,6 +3,8 @@ package com.pranshu.EcomProductService.service;
 import com.pranshu.EcomProductService.dto.ProductListResponseDTO;
 import com.pranshu.EcomProductService.dto.ProductRequestDTO;
 import com.pranshu.EcomProductService.dto.ProductResponseDTO;
+import com.pranshu.EcomProductService.exception.InvalidTitleException;
+import com.pranshu.EcomProductService.exception.ProductNotFoundException;
 import com.pranshu.EcomProductService.model.Product;
 import com.pranshu.EcomProductService.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -47,8 +49,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDTO findProductByTitle(String title) {
+    public ProductResponseDTO findProductByTitle(String title) throws ProductNotFoundException {
+        if(title == null || title.isEmpty()) {
+            throw new InvalidTitleException("title is invalid");
+        }
         Product product = productRepository.findByTitle(title);
+        if(product == null) {
+            throw new ProductNotFoundException("Product with given title is not available");
+        }
         ProductResponseDTO productResponseDTO = convertProductToProductResponseDTO(product);
         return productResponseDTO;
     }

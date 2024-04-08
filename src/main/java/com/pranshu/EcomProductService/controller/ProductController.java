@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/title/{title}")
-    public ResponseEntity getProductFromTitle(@PathVariable("title") String title) {
+    public ResponseEntity getProductFromTitle(@PathVariable("title") String title) throws ProductNotFoundException {
         ProductResponseDTO response = productService.findProductByTitle(title);
         return ResponseEntity.ok(response);
     }
