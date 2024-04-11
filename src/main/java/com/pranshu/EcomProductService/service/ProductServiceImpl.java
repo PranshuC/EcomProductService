@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.pranshu.EcomProductService.mapper.ProductMapper.convertProductListToProductListResponseDTO;
+import static com.pranshu.EcomProductService.mapper.ProductMapper.convertProductsToProductListResponseDTO;
 import static com.pranshu.EcomProductService.mapper.ProductMapper.convertProductToProductResponseDTO;
 
 @Service("productService")
@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductListResponseDTO getAllProducts() {
         List<Product> products = productRepository.findAll();
-        return convertProductListToProductListResponseDTO(products);
+        return convertProductsToProductListResponseDTO(products);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class ProductMapper {
         return productResponseDTO;
     }
 
-    public static ProductListResponseDTO convertProductListToProductListResponseDTO(List<Product> products) {
+    public static ProductListResponseDTO convertProductsToProductListResponseDTO(List<Product> products) {
         ProductListResponseDTO productListResponseDTO = new ProductListResponseDTO();
         for(Product product : products) {
             ProductResponseDTO productResponseDTO = new ProductResponseDTO();
