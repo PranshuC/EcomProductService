@@ -1,6 +1,7 @@
 package com.pranshu.EcomProductService.controller.controllerAdvice;
 
 import com.pranshu.EcomProductService.dto.ErrorResponseDTO;
+import com.pranshu.EcomProductService.exception.InvalidTokenException;
 import com.pranshu.EcomProductService.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,14 @@ public class GlobalControllerAdvice {
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setStatusCode(404);
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = InvalidTokenException.class)
+    public ResponseEntity<ErrorResponseDTO> handleInvalidTokenException(Exception ex) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setStatusCode(403);
+        return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
     }
 }
 

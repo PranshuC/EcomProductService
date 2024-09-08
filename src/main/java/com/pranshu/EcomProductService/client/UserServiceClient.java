@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -28,8 +29,12 @@ public class UserServiceClient {
     public String validateToken(ValidateTokenDTO validateTokenDTO){
         String validateTokenURL  = userServiceAPIURL + userServiceValidatePath;
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<String> validateTokenResponse =
-                restTemplate.postForEntity(validateTokenURL, validateTokenDTO, String.class);
+        ResponseEntity<String> validateTokenResponse = null;
+        try {
+            validateTokenResponse = restTemplate.postForEntity(validateTokenURL, validateTokenDTO, String.class);
+        } catch (HttpClientErrorException.Forbidden e) {
+            return e.getResponseBodyAsString();
+        }
         return validateTokenResponse.getBody();
     }
 }
