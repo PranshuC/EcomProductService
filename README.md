@@ -109,3 +109,13 @@ private List<Product> product;
 2. Insertion of data -> save() -> upsert (insert and update)
 3. Query
 
+
+### Backend Projects: Implementing Search: Paging, Sorting, Elastic Search [29-01-24]
+1. UserServiceClient: connect ProductService with UserService to validateToken
+
+
+### Backend Projects: Payment Microservice, Webhooks & Crons [15-02-24]
+1. interface JpaRepository extends ListPagingAndSortingRepository extends PagingAndSortingRepository > 
+findAll(Pageable pageable). PageRequest.of(pageNumber, PageSize) implements Pageable
+
+
