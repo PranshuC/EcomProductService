@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 public class SearchService {
     private ProductRepository productRepository;
+    //private OpenSearchProductRepository openSearchProductRepository;
 
     SearchService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -34,7 +35,6 @@ public class SearchService {
                 sort.and(Sort.by(sortParams.get(i).getName()).descending());
             }
         }
-        System.out.println(sort.toString());
 
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, sort);
         List<Product> products = productRepository.findAllByTitleContainingIgnoreCase(query, pageRequest);

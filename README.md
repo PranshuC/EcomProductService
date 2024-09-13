@@ -127,3 +127,27 @@ Page object provides more information than List. Ex : totalPages, totalElements,
 Sort sort = Sort.by("title").ascending()
                 .and(Sort.by("rating").descending());
 ```
+
+
+### Backend Projects: Implement Sorting & ElasticSearch [22-02-24]
+1. **Amazon OpenSearch Service** (ElasticSearch) : Create a domain, get the endpoint <br>
+Standard create, Dev/test, Domain without standby, 1-AZ, General purpose, 
+t3.small.search, 1 node, EBS:General Purpose(SSD)-gp3, 10GiB, Public access, master user.
+2. **Spring Data OpenSearch** : pom.xml, application.properties, models/Product.java <br>
+Document in ElasticSearch => Row in PostgreSQL
+```java
+import org.springframework.data.elasticsearch.annotations.Document;
+@Document(indexName = "products")
+```
+3. **OpenSearchProductRepository** extends ElasticsearchRepository extends CrudRepository,PagingAndSortingRepository
+4. SearchService : Use OpenSearchProductRepository for optimized search
+5. ProductServiceImpl : openSearchProductRepository.save(savedProduct) after Id generated in PostgreSQL(source of truth)
+
+References : <br>
+https://elasticsearch-cheatsheet.jolicode.com/ <br>
+https://medium.com/level-up-roadmap/getting-started-with-spring-boot-data-opensearch-3acde70492a8 <br>
+https://github.com/opensearch-project/spring-data-opensearch <br>
+https://medium.com/@irene-zhou/rdbms-vs-elasticsearch-e1e8dd11818 <br>
+https://aws.amazon.com/blogs/architecture/text-analytics-on-aws-implementing-a-data-lake-architecture-with-opensearch/
+
+

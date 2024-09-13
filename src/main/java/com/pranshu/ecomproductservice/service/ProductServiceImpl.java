@@ -24,6 +24,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     private PriceRepository priceRepository;
     private CategoryRepository categoryRepository;
+    //private OpenSearchProductRepository openSearchProductRepository;
+
 
     public ProductServiceImpl(ProductRepository productRepository, PriceRepository priceRepository,
                               CategoryRepository categoryRepository) {
@@ -57,6 +59,9 @@ public class ProductServiceImpl implements ProductService {
 
         // Save the product entity
         Product savedProduct = productRepository.save(product);
+
+        // Save the product entity in OpenSearch after Id generated in PostgreSQL
+        //openSearchProductRepository.save(savedProduct);
 
         // Convert the saved Product entity to ProductResponseDTO
         ProductResponseDTO productResponseDTO = ProductResponseDTO.from(savedProduct);
