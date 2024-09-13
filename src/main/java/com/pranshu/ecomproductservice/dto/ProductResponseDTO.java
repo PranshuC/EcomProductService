@@ -21,9 +21,7 @@ public class ProductResponseDTO {
         if(product == null) {
             return null;
         }
-        if (product.getId() != null) {
-            productDto.setId(product.getId());
-        }
+        productDto.setId(product.getId());
         productDto.setTitle(product.getTitle());
         productDto.setPrice(product.getPrice().getAmount());
         productDto.setCategory(product.getCategory().getCategoryName());

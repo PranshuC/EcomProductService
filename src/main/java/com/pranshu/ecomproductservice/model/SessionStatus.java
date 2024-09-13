@@ -1,4 +1,4 @@
-package com.pranshu.ecomproductservice.dto;
+package com.pranshu.ecomproductservice.model;
 
 public enum SessionStatus {
     ACTIVE,

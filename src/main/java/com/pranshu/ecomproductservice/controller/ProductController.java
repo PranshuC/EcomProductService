@@ -6,6 +6,7 @@ import com.pranshu.ecomproductservice.client.UserServiceClient;
 import com.pranshu.ecomproductservice.dto.*;
 import com.pranshu.ecomproductservice.exception.InvalidTokenException;
 import com.pranshu.ecomproductservice.exception.ProductNotFoundException;
+import com.pranshu.ecomproductservice.model.SessionStatus;
 import com.pranshu.ecomproductservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,8 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity getAllProducts(@RequestHeader("token") String token) {
-        /*ProductResponseDTO p1 = new ProductResponseDTO();
+        /*
+        ProductResponseDTO p1 = new ProductResponseDTO();
         p1.setId(1);
         p1.setTitle("iPhone 15 Pro");
         p1.setPrice(150000);
@@ -53,7 +55,8 @@ public class ProductController {
         p2.setCategory("Electronics");
 
         List<ProductResponseDTO> products = Arrays.asList(p1, p2);
-        return ResponseEntity.ok(products);*/
+        return ResponseEntity.ok(products);
+        */
 
         validateUser(token);
         ProductListResponseDTO response = productService.getAllProducts();

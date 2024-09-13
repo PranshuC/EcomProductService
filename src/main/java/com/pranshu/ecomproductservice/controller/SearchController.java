@@ -26,9 +26,9 @@ public class SearchController {
         List<ProductResponseDTO> productDtos = searchService.searchProducts(
                 requestDto.getTitle(),
                 requestDto.getPageNumber(),
-                requestDto.getPageSize());
+                requestDto.getPageSize(),
+                requestDto.getSortParams());
         //return productDtos;
-        // Page object provides more information. Ex : totalPages, totalElements, sort etc.
         Page<ProductResponseDTO> productDtoPage = new PageImpl<>(productDtos);
         return productDtoPage;
     }

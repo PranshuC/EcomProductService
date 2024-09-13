@@ -120,3 +120,10 @@ findAll(Pageable pageable). PageRequest.of(pageNumber, PageSize) implements Page
 
 
 ### Backend Projects: Implementing Search: Paging & Sorting [17-02-24]
+1. Paging : SearchController(return Page<ProductResponseDTO>), SearchRequestDto, SearchService <br>
+Page object provides more information than List. Ex : totalPages, totalElements, sort etc.
+2. Sorting : SortParam(SortParam, sortType); Sort - ascending by default
+```java
+Sort sort = Sort.by("title").ascending()
+                .and(Sort.by("rating").descending());
+```
