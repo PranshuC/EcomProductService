@@ -5,23 +5,33 @@ import com.pranshu.ecomproductservice.dto.ProductRequestDTO;
 import com.pranshu.ecomproductservice.dto.ProductResponseDTO;
 import com.pranshu.ecomproductservice.exception.InvalidTitleException;
 import com.pranshu.ecomproductservice.exception.ProductNotFoundException;
+import com.pranshu.ecomproductservice.model.Category;
+import com.pranshu.ecomproductservice.model.Price;
 import com.pranshu.ecomproductservice.model.Product;
+import com.pranshu.ecomproductservice.repository.CategoryRepository;
+import com.pranshu.ecomproductservice.repository.PriceRepository;
 import com.pranshu.ecomproductservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductsToProductListResponseDTO;
 import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductToProductResponseDTO;
+import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductsToProductListResponseDTO;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
+    private PriceRepository priceRepository;
+    private CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, PriceRepository priceRepository,
+                              CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.priceRepository = priceRepository;
+        this.categoryRepository = categoryRepository;
     }
+
     @Override
     public ProductListResponseDTO getAllProducts() {
         List<Product> products = productRepository.findAll();
@@ -35,7 +45,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {
-        return null;
+        // Convert ProductRequestDTO to Product entity
+        Product product = new Product();
+        product.setTitle(productRequestDTO.getTitle());
+        product.setDescription(productRequestDTO.getDescription());
+        product.setImage(productRequestDTO.getImage());
+        Price price = priceRepository.save(new Price("INR", productRequestDTO.getPrice(), 0.0));
+        product.setPrice(price);
+        Category category = categoryRepository.save(new Category(productRequestDTO.getCategory()));
+        product.setCategory(category);
+
+        // Save the product entity
+        Product savedProduct = productRepository.save(product);
+
+        // Convert the saved Product entity to ProductResponseDTO
+        ProductResponseDTO productResponseDTO = ProductResponseDTO.from(savedProduct);
+
+        return productResponseDTO;
     }
 
     @Override

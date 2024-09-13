@@ -1,10 +1,14 @@
 package com.pranshu.ecomproductservice.model;
 
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Price extends BaseModel {
     private String currency;
     private double amount;
@@ -12,7 +16,8 @@ public class Price extends BaseModel {
 }
 
 // @Data provides together :
-//@Getter
-//@Setter
-//@NoArgsConstructor
-//@AllArgsConstructor
+// @Getter
+// @Setter
+// @RequiredArgsConstructor
+// @ToString
+// @EqualsAndHashCode

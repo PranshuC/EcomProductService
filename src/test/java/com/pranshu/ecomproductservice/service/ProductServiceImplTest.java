@@ -42,7 +42,7 @@ public class ProductServiceImplTest {
     @Test
     public void testFindProductByTitleSuccess() throws ProductNotFoundException {
         // Arrange
-        Price mockPrice = new Price();
+        Price mockPrice = new Price("INR", productRequestDTO.getPrice(), 0.0);
         mockPrice.setAmount(100);
 
         Category mockCategory = new Category();
@@ -81,7 +81,7 @@ public class ProductServiceImplTest {
     @Test
     public void testFindProductByTitle_NullTitle() {
         // Arrange
-        Price mockPrice = new Price();
+        Price mockPrice = new Price("INR", productRequestDTO.getPrice(), 0.0);
         mockPrice.setAmount(100);
 
         Category mockCategory = new Category();

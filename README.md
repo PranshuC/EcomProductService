@@ -119,3 +119,4 @@ private List<Product> product;
 findAll(Pageable pageable). PageRequest.of(pageNumber, PageSize) implements Pageable
 
 
+### Backend Projects: Implementing Search: Paging & Sorting [17-02-24]
