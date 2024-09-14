@@ -16,13 +16,13 @@ import java.util.List;
 @Component
 public class FakeStoreAPIClient {
 
+    @Value("${fakestore.api.url}")
     private String fakeStoreAPIURL;
     @Value("${fakestore.api.path.product}")
     private String fakeStoreAPIPathProduct;
     private RestTemplateBuilder restTemplateBuilder;
 
-    public FakeStoreAPIClient(RestTemplateBuilder restTemplateBuilder,
-                              @Value("${fakestore.api.url}") String fakeStoreAPIURL) {
+    public FakeStoreAPIClient(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplateBuilder = restTemplateBuilder;
     }
 
@@ -35,7 +35,7 @@ public class FakeStoreAPIClient {
     }
 
     public FakeStoreProductResponseDTO getProductById(int id) {
-        String getProductByIdURL = fakeStoreAPIURL + fakeStoreAPIPathProduct + id;
+        String getProductByIdURL = fakeStoreAPIURL + fakeStoreAPIPathProduct + "/" + id;
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductResponseDTO> productResponse =
                 restTemplate.getForEntity(getProductByIdURL, FakeStoreProductResponseDTO.class);

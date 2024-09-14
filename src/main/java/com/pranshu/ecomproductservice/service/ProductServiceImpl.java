@@ -18,6 +18,7 @@ import java.util.List;
 import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductToProductResponseDTO;
 import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductsToProductListResponseDTO;
 
+//@Primary
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
 

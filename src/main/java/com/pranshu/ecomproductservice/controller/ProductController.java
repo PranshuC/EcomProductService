@@ -8,7 +8,6 @@ import com.pranshu.ecomproductservice.exception.InvalidTokenException;
 import com.pranshu.ecomproductservice.exception.ProductNotFoundException;
 import com.pranshu.ecomproductservice.model.SessionStatus;
 import com.pranshu.ecomproductservice.service.ProductService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +20,9 @@ public class ProductController {
     private final UserServiceClient userServiceClient;
 
     // @Autowired is optional from Spring 4.3 onwards
-    public ProductController(
-            //@Qualifier("fakeStoreProductService") ProductService productService) {
-            @Qualifier("productService") ProductService productService,
-            UserServiceClient userServiceClient) {
+    //@Qualifier("fakeStoreProductService")
+    //@Qualifier("productService") -> @Primary (in ProductServiceImpl)
+    public ProductController(ProductService productService, UserServiceClient userServiceClient) {
         this.productService = productService;
         this.userServiceClient = userServiceClient;
     }

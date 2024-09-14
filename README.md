@@ -142,7 +142,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 3. **OpenSearchProductRepository** extends ElasticsearchRepository extends CrudRepository,PagingAndSortingRepository
 4. SearchService : Use OpenSearchProductRepository for optimized search
 5. ProductServiceImpl : openSearchProductRepository.save(savedProduct) after Id generated in PostgreSQL(source of truth)
-
+[RedisConfig.java](src/main/java/com/pranshu/ecomproductservice/config/RedisConfig.java)
 References : <br>
 https://elasticsearch-cheatsheet.jolicode.com/ <br>
 https://medium.com/level-up-roadmap/getting-started-with-spring-boot-data-opensearch-3acde70492a8 <br>
@@ -151,3 +151,14 @@ https://medium.com/@irene-zhou/rdbms-vs-elasticsearch-e1e8dd11818 <br>
 https://aws.amazon.com/blogs/architecture/text-analytics-on-aws-implementing-a-data-lake-architecture-with-opensearch/
 
 
+### Backend Projects: Integrating Cache: Redis [27-02-24]
+1. Redis : pom.xml(dependency), RedisConfig (JedisConnectionFactory->RedisConnectionFactory)
+2. Run Redis in Docker. ERROR : java.net.UnknownHostException: my-redis: nodename nor servname provided
+3. **Amazon ElastiCache** costly, running Redis locally. *brew services start redis* <br>
+(Latency reduced from ~ 1000ms to 10ms)
+4. FakeStoreProductServiceImpl(@Primary): getProductById method modified to get data from Redis, else FakeStore API.
+
+References : <br>
+https://www.baeldung.com/spring-data-redis-tutorial <br>
+https://www.docker.com/blog/how-to-use-the-redis-docker-official-image/ <br>
+https://aws.amazon.com/elasticache/pricing/

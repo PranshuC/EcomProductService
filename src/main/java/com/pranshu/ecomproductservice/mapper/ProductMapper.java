@@ -4,6 +4,7 @@ import com.pranshu.ecomproductservice.dto.*;
 import com.pranshu.ecomproductservice.model.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ProductMapper {
     public static FakeStoreProductRequestDTO productRequestToFakeStoreProductRequest(ProductRequestDTO productRequestDTO) {
@@ -18,7 +19,7 @@ public class ProductMapper {
 
     public static ProductResponseDTO fakeStoreProductResponseToProductResponse(FakeStoreProductResponseDTO fakeStoreProductResponseDTO) {
         ProductResponseDTO productResponseDTO = new ProductResponseDTO();
-        productResponseDTO.setId(fakeStoreProductResponseDTO.getId());
+        productResponseDTO.setId(UUID.randomUUID());
         productResponseDTO.setTitle(fakeStoreProductResponseDTO.getTitle());
         productResponseDTO.setPrice(fakeStoreProductResponseDTO.getPrice());
         productResponseDTO.setCategory(fakeStoreProductResponseDTO.getCategory());
