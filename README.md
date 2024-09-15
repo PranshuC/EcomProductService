@@ -162,3 +162,14 @@ References : <br>
 https://www.baeldung.com/spring-data-redis-tutorial <br>
 https://www.docker.com/blog/how-to-use-the-redis-docker-official-image/ <br>
 https://aws.amazon.com/elasticache/pricing/
+
+
+### Backend Projects: Notification Service [28-02-24]
+1. Amazon **Simple Email Service** (SES) : Create a domain, verify to send bulk-notifications
+
+References : <br>
+https://www.baeldung.com/spring-kafka <br>
+https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka <br>
+https://reflectoring.io/spring-cloud-aws-ses/ <br>
+https://github.com/MLP-07/Notification-Service (Sample Notification Service) <br>
+https://stackoverflow.com/questions/42471870/publish-subscribe-vs-producer-consumer
