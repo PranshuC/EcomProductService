@@ -164,12 +164,20 @@ https://www.docker.com/blog/how-to-use-the-redis-docker-official-image/ <br>
 https://aws.amazon.com/elasticache/pricing/
 
 
-### Backend Projects: Notification Service [28-02-24]
-1. Amazon **Simple Email Service** (SES) : Create a domain, verify to send bulk-notifications
+### Backend Project: Spring Cloud [05-03-24]
+1. EcomServiceDiscovery project : Eureka server
+2. eureka-client dependency, application.properties : eureka.client...=true <br>
+   (spring.application.name property is required for Eureka to recognize MS)
+2. Edit Configurations > Environment Variables : ${SERVER_PORT} -> dynamic diff values <br>
+(Running multiple instances with different ports : Multiple registrations in Eureka server)
+3. RestTemplateConfig -> common RestTemplate Bean 
+4. Make a call to UserService's URL (directly) to validate inter-MS communication. <br>
+(hardcoding the port in URL - not recommended : SPOF) Ex: SelfProductServiceImpl.getProductById
+5. http://localhost:9090/users/1 -> http://ecomuserservice/users/1 & RestTemplate @LoadBalanced <br>
+(host:port -> application name registered with Eureka : RestTemplate calls Eureka)
 
 References : <br>
-https://www.baeldung.com/spring-kafka <br>
-https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka <br>
-https://reflectoring.io/spring-cloud-aws-ses/ <br>
-https://github.com/MLP-07/Notification-Service (Sample Notification Service) <br>
-https://stackoverflow.com/questions/42471870/publish-subscribe-vs-producer-consumer
+https://spring.io/guides/gs/service-registration-and-discovery <br>
+https://spring.io/guides/gs/spring-cloud-loadbalancer
+
+

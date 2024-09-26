@@ -62,13 +62,13 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity getProductFromId(@PathVariable("id") int id, @RequestHeader("token") String token) throws ProductNotFoundException {
+    public ResponseEntity getProductById(@PathVariable("id") int id, @RequestHeader("token") String token) throws ProductNotFoundException {
         ProductResponseDTO response = productService.getProductById(id);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/products/title/{title}")
-    public ResponseEntity getProductFromTitle(@PathVariable("title") String title, @RequestHeader("token") String token) throws ProductNotFoundException {
+    public ResponseEntity findProductByTitle(@PathVariable("title") String title, @RequestHeader("token") String token) throws ProductNotFoundException {
         ProductResponseDTO response = productService.findProductByTitle(title);
         return ResponseEntity.ok(response);
     }

@@ -5,7 +5,6 @@ import com.pranshu.ecomproductservice.dto.*;
 import com.pranshu.ecomproductservice.exception.ProductNotFoundException;
 import com.pranshu.ecomproductservice.model.Product;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import static com.pranshu.ecomproductservice.mapper.ProductMapper.fakeStoreProdu
 import static com.pranshu.ecomproductservice.mapper.ProductMapper.productRequestToFakeStoreProductRequest;
 import static com.pranshu.ecomproductservice.util.ProductUtils.isNull;
 
-@Primary
+//@Primary
 @Service("fakeStoreProductService")
 public class FakeStoreProductServiceImpl implements ProductService {
 

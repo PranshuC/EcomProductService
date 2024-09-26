@@ -3,6 +3,7 @@ package com.pranshu.ecomproductservice.service;
 import com.pranshu.ecomproductservice.dto.ProductListResponseDTO;
 import com.pranshu.ecomproductservice.dto.ProductRequestDTO;
 import com.pranshu.ecomproductservice.dto.ProductResponseDTO;
+import com.pranshu.ecomproductservice.dto.UserDto;
 import com.pranshu.ecomproductservice.exception.InvalidTitleException;
 import com.pranshu.ecomproductservice.exception.ProductNotFoundException;
 import com.pranshu.ecomproductservice.model.Category;
@@ -11,28 +12,33 @@ import com.pranshu.ecomproductservice.model.Product;
 import com.pranshu.ecomproductservice.repository.CategoryRepository;
 import com.pranshu.ecomproductservice.repository.PriceRepository;
 import com.pranshu.ecomproductservice.repository.ProductRepository;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductToProductResponseDTO;
 import static com.pranshu.ecomproductservice.mapper.ProductMapper.convertProductsToProductListResponseDTO;
 
-//@Primary
+@Primary
 @Service("productService")
-public class ProductServiceImpl implements ProductService {
+public class SelfProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
     private PriceRepository priceRepository;
     private CategoryRepository categoryRepository;
     //private OpenSearchProductRepository openSearchProductRepository;
+    private RestTemplate restTemplate;
 
 
-    public ProductServiceImpl(ProductRepository productRepository, PriceRepository priceRepository,
-                              CategoryRepository categoryRepository) {
+    public SelfProductServiceImpl(ProductRepository productRepository, PriceRepository priceRepository,
+                                  CategoryRepository categoryRepository, RestTemplate restTemplate) {
         this.productRepository = productRepository;
         this.priceRepository = priceRepository;
         this.categoryRepository = categoryRepository;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -43,7 +49,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDTO getProductById(int id) {
-        return null;
+        // Actual implementation : id is UUID, so skipping for now
+
+        // User Service Call - Test Eureka Server
+        //String URL = "http://localhost:9090/users/1";
+        String URL = "http://ecomuserservice/users/1";
+        ResponseEntity<UserDto> responseEntity = restTemplate.getForEntity(URL, UserDto.class);
+
+        return new ProductResponseDTO();
     }
 
     @Override

@@ -30,7 +30,7 @@ public class ProductServiceImplTest {
     // This is the class we want to test, and we would inject the mock object
     // We are marking now; when class is created, it will inject the mock object
     @InjectMocks
-    private ProductServiceImpl productServiceImpl;
+    private SelfProductServiceImpl selfProductServiceImpl;
 
     @BeforeEach
     public void setUp() {
@@ -60,7 +60,7 @@ public class ProductServiceImplTest {
         when(productRepository.findByTitle(testTitle)).thenReturn(mockProduct);
 
         // Act
-        ProductResponseDTO actualResponse = productServiceImpl.findProductByTitle(testTitle);
+        ProductResponseDTO actualResponse = selfProductServiceImpl.findProductByTitle(testTitle);
 
         // Assert
         Assertions.assertEquals(actualResponse.getId(), mockProduct.getId());
@@ -75,7 +75,7 @@ public class ProductServiceImplTest {
         when(productRepository.findByTitle(testTitle)).thenReturn(null);
 
         // Act and Assert
-        Assertions.assertThrows(ProductNotFoundException.class, () -> productServiceImpl.findProductByTitle(testTitle));
+        Assertions.assertThrows(ProductNotFoundException.class, () -> selfProductServiceImpl.findProductByTitle(testTitle));
     }
 
     @Test
@@ -97,6 +97,6 @@ public class ProductServiceImplTest {
         when(productRepository.findByTitle(testTitle)).thenReturn(mockProduct);
 
         // Act and Assert
-        Assertions.assertThrows(InvalidTitleException.class, () -> productServiceImpl.findProductByTitle(testTitle));
+        Assertions.assertThrows(InvalidTitleException.class, () -> selfProductServiceImpl.findProductByTitle(testTitle));
     }
 }
