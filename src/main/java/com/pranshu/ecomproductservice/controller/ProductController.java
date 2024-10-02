@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Base64;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService; // immutable - Constructor injection
@@ -33,7 +34,7 @@ public class ProductController {
     private ProductService productService;
  */
 
-    @GetMapping("/products")
+    @GetMapping("/")
     public ResponseEntity getAllProducts(@RequestHeader("token") String token) {
         /*
         ProductResponseDTO p1 = new ProductResponseDTO();
@@ -61,25 +62,25 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity getProductById(@PathVariable("id") int id, @RequestHeader("token") String token) throws ProductNotFoundException {
         ProductResponseDTO response = productService.getProductById(id);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/products/title/{title}")
+    @GetMapping("/title/{title}")
     public ResponseEntity findProductByTitle(@PathVariable("title") String title, @RequestHeader("token") String token) throws ProductNotFoundException {
         ProductResponseDTO response = productService.findProductByTitle(title);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/products")
+    @PostMapping("/")
     public ResponseEntity createProduct(@RequestBody ProductRequestDTO productRequestDTO, @RequestHeader("token") String token) {
         ProductResponseDTO responseDTO = productService.createProduct(productRequestDTO);
         return ResponseEntity.ok(responseDTO);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteProduct(@PathVariable("id") int id, @RequestHeader("token") String token) {
         boolean response = productService.deleteProduct(id);
         return ResponseEntity.ok(response);
