@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-deployment
+  labels:
+    app: product-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      name: product-service
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service
+          image: pranshuc1/ecomproductservice:v1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5050
+              protocol: TCP
+          env:
+            - name: SPRING_DATA_REDIS_HOST
+              value: "my-redis"
+            - name: SPRING_DATA_REDIS_PORT
+              value: "6379"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://localhost:5432/ecom_product"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "password"
+      restartPolicy: Always
+      

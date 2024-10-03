@@ -181,3 +181,38 @@ https://spring.io/guides/gs/service-registration-and-discovery <br>
 https://spring.io/guides/gs/spring-cloud-loadbalancer
 
 
+### Managing our Microservices: Docker and Kubernetes [14-04-24]
+1. Dockerfile created.
+2. Create DockerHub account, Check Docker installed & running
+3. docker build -t pranshuc1/ecomproductservice:v1.0 .
+4. docker run -p 5050:5050 pranshuc1/ecomproductservice:v1.0 (Test in new terminal, without making public)
+5. docker push pranshuc1/ecomproductservice:v1.0 (now anyone can run this image in their system)
+
+DockeHub - ready-to-use images
+
+References : <br>
+https://www.oracle.com/technical-resources/articles/it-infrastructure/admin-manage-vbox-cli.html <br>
+"Understanding the Linux Kernel" book by Daniel P. Bovet and Marco Cesati <br>
+Project Module Resume Pointers: https://docs.google.com/document/d/1MVo3lJtNm0AISNAKU2xR9Y1tOWY0KfBtgexdy2SSCec/edit <br>
+HLD Prep : https://docs.google.com/spreadsheets/d/1Zed_C4BHrF2LFer1ZVpQivIU947KvWnRzR9EL1iNv_k/edit#gid=0 <br>
+HLD Lectures of Scaler, ByteByteGo, YT: System Design Fight Club & Jordan has no life <br>
+DSA Prep: https://docs.google.com/spreadsheets/d/1hGbRbMnkmmwbslMD89b6O4yoCW7LRpuEzVKXuzL9wKQ/edit#gid=0
+
+
+### Kubernetes [21-04-24]
+1. Install minikube & start the cluster
+2. kubectl get pods
+3. kubectl apply -f ProductServiceDeployment.yaml
+4. kubectl apply -f ProductService_Service.yaml
+5. kubectl delete pod productserviceee-694c4b6895-kbhpt <br>
+Immediately a new instance churns up, to keep replica count same.
+6. minikube dashboard <br>
+GUI : Details of all the deployment & services. Check logs.
+
+New Technology : Read the official documentation, build toy-project, build upon concepts & implement further.
+
+References: <br>
+https://minikube.sigs.k8s.io/docs/start/ <br>
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/ <br>
+https://kubernetes.io/docs/concepts/services-networking/service/ <br>
+https://github.blog/2022-02-02-build-ci-cd-pipeline-github-actions-four-steps/ <br>

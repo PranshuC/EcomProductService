@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.UUID;
 
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -42,7 +41,7 @@ public class ProductServiceImplTest {
     @Test
     public void testFindProductByTitleSuccess() throws ProductNotFoundException {
         // Arrange
-        Price mockPrice = new Price("INR", productRequestDTO.getPrice(), 0.0);
+        Price mockPrice = new Price("INR", 0.0, 0.0);
         mockPrice.setAmount(100);
 
         Category mockCategory = new Category();
@@ -81,7 +80,7 @@ public class ProductServiceImplTest {
     @Test
     public void testFindProductByTitle_NullTitle() {
         // Arrange
-        Price mockPrice = new Price("INR", productRequestDTO.getPrice(), 0.0);
+        Price mockPrice = new Price("INR", 0.0, 0.0);
         mockPrice.setAmount(100);
 
         Category mockCategory = new Category();
